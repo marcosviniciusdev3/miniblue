@@ -57,6 +57,7 @@ func NewHandler(s *store.Store) *Handler {
 }
 
 func (h *Handler) Register(r chi.Router) {
+	h.registerNICRoutes(r)
 	r.Route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks", func(r chi.Router) {
 		r.Get("/", h.ListVNets)
 		r.Route("/{vnetName}", func(r chi.Router) {
