@@ -41,6 +41,7 @@ func NewHandler(s *store.Store) *Handler {
 
 // Register mounts all VM ARM routes on the given router.
 func (h *Handler) Register(r chi.Router) {
+	h.registerDiskRoutes(r)
 	r.Route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines", func(r chi.Router) {
 		r.Get("/", h.ListVMs)
 		r.Route("/{vmName}", func(r chi.Router) {
